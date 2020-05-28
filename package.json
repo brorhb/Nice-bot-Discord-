@@ -1,0 +1,10 @@
+{
+  "name": "Nice-bot",
+  "version": "1.0.0",
+  "description": "A nice bot",
+  "main": "bot.js",
+  "author": "Bror Brurberg",
+  "dependencies": {
+    "discord.io": "https://github.com/woor/discord.io/tarball/gateway_v6"
+  }
+}
