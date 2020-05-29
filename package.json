@@ -6,5 +6,8 @@
   "author": "Bror Brurberg",
   "dependencies": {
     "discord.io": "https://github.com/woor/discord.io/tarball/gateway_v6"
+  },
+  "scripts": {
+    "start": "node bot.js"
   }
 }
