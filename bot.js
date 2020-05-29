@@ -25,6 +25,11 @@ bot.on('message', function (user, id, channel, msg, evt) {
       to: channel,
       message: 'https://media.giphy.com/media/9CgJFal0lUtUI/giphy.gif'
     })
+  } else if (msg.includes('yesyes')) {
+    bot.sendMessage({
+      to: channel,
+      message: 'https://tenor.com/view/animal-crossing-tom-nook-clapping-clap-animal-crossing-new-horizons-gif-16657276'
+    })
   }
 })
 
