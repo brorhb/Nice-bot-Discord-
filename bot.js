@@ -4,7 +4,7 @@ const fs = require('fs')
 const daddyGifs = require('./daddy')
 
 const bot = new Discord.Client({
-  token: auth.token,
+  token: process.env.BOT_TOKEN,
   autorun: true
 })
 
