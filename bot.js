@@ -11,7 +11,7 @@ bot.on('message', function (user, id, channel, msg, evt) {
   msg = msg.toLowerCase()
   if (msg.includes('nice') && id != bot.id) {
     getJsonData(function (err, data) {
-      niceJSONHandler(err, data)
+      niceJSONHandler(err, data, user, id, channel, msg, evt)
     })
   } else if (
     msg == '!daddy' ||
@@ -19,23 +19,22 @@ bot.on('message', function (user, id, channel, msg, evt) {
     msg == '!papi' ||
     msg == '!pappa'
   ) {
-    daddyResponse()
+    daddyResponse(null, null, channel)
   }
 })
 
-function daddyResponse() {
+function daddyResponse(user, id, channel, msg, evt) {
   bot.sendMessage({
     to: channel,
     message: 'https://media.giphy.com/media/lPFmR2vjyl07TXu1CA/giphy.gif'
   })
 }
 
-function niceJSONHandler(err, data) {
+function niceJSONHandler(err, data, user, id, channel, msg, evt) {
   if (err) {
     console.log(err)
     return
   }
-  console.log(data)
   if (!data) data = {}
   if (data[user]) {
     data[user] = data[user] + 1
@@ -56,11 +55,12 @@ https://tenor.com/view/nice-south-park-not-bad-good-one-gif-4294992
 
 function top3(data) {
   let result = ''
+  const leaderboard = Object.keys(data).sort((a, b) => data[b] - data[a])
   for (var i = 0; i < 3; i++) {
-    let user = Object.keys(data)[i] || false
-    console.log(user, i)
+    let user = leaderboard[i]
+    let score = data[leaderboard[i]] || false
     if (user) {
-      result += `${user}: ${data[user]}\n`
+      result += `${user}: ${score}\n`
     }
   }
   return result
