@@ -1,6 +1,7 @@
 const Discord = require('discord.io')
 const auth = require('./auth.json')
 const fs = require('fs')
+const daddyGifs = require('./daddy')
 
 const bot = new Discord.Client({
   token: auth.token,
@@ -20,13 +21,19 @@ bot.on('message', function (user, id, channel, msg, evt) {
     msg == '!pappa'
   ) {
     daddyResponse(null, null, channel)
+  } else if (msg.includes('breadcrumbs')) {
+    bot.sendMessage({
+      to: channel,
+      message: 'https://media.giphy.com/media/9CgJFal0lUtUI/giphy.gif'
+    })
   }
 })
 
 function daddyResponse(user, id, channel, msg, evt) {
+  const gif = daddyGifs[[Math.floor(Math.random() * daddyGifs.length)]]
   bot.sendMessage({
     to: channel,
-    message: 'https://media.giphy.com/media/lPFmR2vjyl07TXu1CA/giphy.gif'
+    message: gif
   })
 }
 
@@ -44,11 +51,11 @@ function niceJSONHandler(err, data, user, id, channel, msg, evt) {
   bot.sendMessage({
     to: channel,
     message: `
-Nice count for ${user}: ${data[user]}\n
-Nice leaderboard:\n
+Nice count for *${user}*: **${data[user]}**
+**Nice leaderboard:**
 ${top3(data)}
 https://tenor.com/view/nice-south-park-not-bad-good-one-gif-4294992
-    `
+`
   })
   wirteData(data)
 }
@@ -60,7 +67,7 @@ function top3(data) {
     let user = leaderboard[i]
     let score = data[leaderboard[i]] || false
     if (user) {
-      result += `${user}: ${score}\n`
+      result += `${user}: *${score}*\n`
     }
   }
   return result
@@ -78,7 +85,6 @@ async function wirteData(data) {
 }
 
 async function getJsonData(cb) {
-  let parsedJson
   await fs.readFile('counter.json', 'utf8', function (err, data) {
     if (err) {
       cb(err, null)
