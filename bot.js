@@ -9,7 +9,7 @@ const bot = new Discord.Client({
 
 bot.on('message', function (user, id, channel, msg, evt) {
   msg = msg.toLowerCase()
-  if (msg.includes('nice') && id != bot.id) {
+  if ((msg.includes('nice') || msg.includes(' 69 ')) && id != bot.id) {
     getJsonData(function (err, data) {
       niceJSONHandler(err, data, user, id, channel, msg, evt)
     })
@@ -55,7 +55,7 @@ function niceJSONHandler(err, data, user, id, channel, msg, evt) {
   bot.sendMessage({
     to: channel,
     message: `
-Nice *${user}*
+A big fat NICE from *${user}*
 https://tenor.com/view/nice-south-park-not-bad-good-one-gif-4294992
 `
   })
