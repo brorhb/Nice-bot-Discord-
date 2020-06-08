@@ -55,13 +55,10 @@ function niceJSONHandler(err, data, user, id, channel, msg, evt) {
   bot.sendMessage({
     to: channel,
     message: `
-Nice count for *${user}*: **${data[user]}**
-**Nice leaderboard:**
-${top3(data)}
+Nice *${user}*
 https://tenor.com/view/nice-south-park-not-bad-good-one-gif-4294992
 `
   })
-  wirteData(data)
 }
 
 function top3(data) {
