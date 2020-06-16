@@ -1,10 +1,12 @@
 const Discord = require('discord.io')
 const daddyGifs = require('./daddy')
 
-const bot = new Discord.Client({
-  token: process.env.BOT_TOKEN,
-  autorun: true
-})
+const bot = new Discord.Client();
+bot.login(process.env.BOT_TOKEN)
+
+bot.on('ready', () => {
+  console.log(`Logged in as ${client.user.tag}!`);
+});
 
 bot.on('message', function (user, id, channel, msg, evt) {
   msg = msg.toLowerCase()
