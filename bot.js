@@ -2,43 +2,29 @@ const Discord = require('discord.js')
 const daddyGifs = require('./daddy')
 
 const bot = new Discord.Client()
-
 bot.login(process.env.TOKEN)
 
-bot.on('message', function (user, id, channel, msg, evt) {
+bot.on('message', function (data) {
+  let msg = data.content
+  let user = data.author
   msg = msg.toLowerCase()
-  if ((msg.includes('nice')) && id != bot.id) {
-    bot.sendMessage({
-      to: channel,
-      message: `
+  if (msg.includes('nice') && !user.bot) {
+    data.reply(`
 A big fat NICE from *${user}*
 https://tenor.com/view/nice-south-park-not-bad-good-one-gif-4294992
 `
-    })
+    )
   } else if (
     msg == '!daddy' ||
     msg == '!papa' ||
     msg == '!papi' ||
     msg == '!pappa'
   ) {
-    daddyResponse(null, null, channel)
+    const gif = daddyGifs[[Math.floor(Math.random() * daddyGifs.length)]]
+    data.reply(gif)
   } else if (msg.includes('breadcrumbs')) {
-    bot.sendMessage({
-      to: channel,
-      message: 'https://media.giphy.com/media/9CgJFal0lUtUI/giphy.gif'
-    })
+    data.reply('https://media.giphy.com/media/9CgJFal0lUtUI/giphy.gif')
   } else if (msg.includes('yesyes')) {
-    bot.sendMessage({
-      to: channel,
-      message: 'https://tenor.com/view/animal-crossing-tom-nook-clapping-clap-animal-crossing-new-horizons-gif-16657276'
-    })
+    data.reply('https://tenor.com/view/animal-crossing-tom-nook-clapping-clap-animal-crossing-new-horizons-gif-16657276')
   }
 })
-
-function daddyResponse(user, id, channel, msg, evt) {
-  const gif = daddyGifs[[Math.floor(Math.random() * daddyGifs.length)]]
-  bot.sendMessage({
-    to: channel,
-    message: gif
-  })
-}
