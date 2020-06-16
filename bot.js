@@ -1,5 +1,4 @@
 const Discord = require('discord.io')
-const fs = require('fs')
 const daddyGifs = require('./daddy')
 
 const bot = new Discord.Client({
