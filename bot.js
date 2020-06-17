@@ -8,6 +8,14 @@ bot.on('message', function (data) {
   let msg = data.content
   let user = data.author
   msg = msg.toLowerCase()
+  if (msg === '!coinflip') {
+    const num = Math.round(Math.random())
+    if (num === 1) {
+      data.reply('heads')
+    } else {
+      data.reply('tails')
+    }
+  }
   if (msg.includes('nice') && !user.bot) {
     data.reply(`
 A big fat NICE from *${user}*
