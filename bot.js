@@ -16,7 +16,7 @@ bot.on('message', function (data) {
       data.reply('tails')
     }
   }
-  if ((msg.includes('nice') || msg.includes('rice')) && !user.bot) {
+  if ((isNice(msg)) && !user.bot) {
     data.reply(`
 A big fat NICE from *${user}*
 https://tenor.com/view/nice-south-park-not-bad-good-one-gif-4294992
@@ -36,3 +36,12 @@ https://tenor.com/view/nice-south-park-not-bad-good-one-gif-4294992
     data.reply('https://tenor.com/view/animal-crossing-tom-nook-clapping-clap-animal-crossing-new-horizons-gif-16657276')
   }
 })
+
+function isNice(msg) {
+  if (msg.includes('nice')) return true
+  let words = msg.match(/\b(\w+)\b/g)
+  for (var i = 0; i < words.length; i++) {
+    return [...new Set(words[i].split(''))].join('') === 'nice'
+  }
+  return false
+}
