@@ -16,7 +16,7 @@ bot.on('message', function (data) {
       data.reply('tails')
     }
   }
-  if (msg.includes('nice') && !user.bot) {
+  if (msg.includes('nice' || msg.includes('rice')) && !user.bot) {
     data.reply(`
 A big fat NICE from *${user}*
 https://tenor.com/view/nice-south-park-not-bad-good-one-gif-4294992
