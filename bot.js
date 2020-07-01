@@ -39,7 +39,7 @@ https://tenor.com/view/nice-south-park-not-bad-good-one-gif-4294992
 
 function isNice(msg) {
   if (msg.includes('nice')) return true
-  let words = msg?.match(/\b(\w+)\b/g)
+  let words = msg.match(/\b(\w+)\b/g)
   if (!words) return false
   for (var i = 0; i < words.length; i++) {
     if ([...new Set(words[i].split(''))].join('') === 'nice') {
